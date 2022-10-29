@@ -8,10 +8,10 @@ const GlobalSummary = () => {
     const { state: { summary, isLoading } } = useContext(DashboardContext);
 
     return (
-        <Grid container>
-            <Grid item xs={12} lg={7}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6} md={4} lg={6} xl={5}>
+        <Grid container >
+            <Grid item xs={12} lg={7} >
+                <Grid container spacing={3} >
+                    <Grid item xs={12} sm={6} md={4} lg={6} xl={5} >
                         <Box mb={3}>
                             <Card name="Total Confirmed" value={summary.Global.TotalConfirmed} icon="sick" isLoading={isLoading} />
                         </Box>

@@ -2,31 +2,16 @@
 import Grid from "@mui/material/Grid";
 import { useContext, useEffect, useState } from "react";
 import { SharedContext } from "../../../StateManagement/Reducers/SharedReducer";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import breakpoints from "../../../Assets/breakpoints";
-import { getAvailableCountries, getCovidSummary } from "../../../Services/Dashboard";
+import { getCovidSummary } from "../../../Services/Dashboard";
 import { AvailableRoutes } from "../../../Store/APIRoutes";
 import { DashboardContext } from "../../../StateManagement/Reducers/DashboardReducer";
 import GlobalSummary from "../Components/GlobalSummary";
 import CountriesList from "../Components/CountriesList";
-import { Loader } from "../../../Components/Loader/Loader";
+import { dashboardStyles } from "../Style/Dashboard";
 
 const DashboardScreen = () => {
-  const { values } = breakpoints;
-  const [show, setShow] = useState(false);
-
-  // //add this delay in case the globe was adding a lag or delay to the dashboard page
-  // useEffect(() => {
-  //   setShow(false);
-
-  //   // show globe after the screen renders
-  //   const intervalId = setTimeout(() => {
-  //     setShow(true);
-  //   }, 50);
-
-  //   return () => clearTimeout(intervalId);
-  // }, [])
-
   const { state: { apiRoutes } } = useContext(SharedContext);
   const { SetSummary, SetIsLoading } = useContext(DashboardContext);
 
@@ -41,11 +26,8 @@ const DashboardScreen = () => {
     let path = apiRoutes[AvailableRoutes.summaryRoute].Path;
     if (path) {
       let result = await getCovidSummary(path);
-      //localStorage.setItem("CData", JSON.stringify(result.data));
-      //let result = localStorage.getItem("CData");
       if (result) {
         SetSummary(result.data);
-        //SetSummary(JSON.parse(result));
         SetIsLoading(false);
       }
     }
@@ -54,27 +36,18 @@ const DashboardScreen = () => {
   return (
     <Box style={{ margin: "2.5% 5%" }}>
       <Grid container>
+        <Grid item xs={12} md={4} lg={4}>
+          <Box component="div" sx={dashboardStyles.titleContainer}>
+            <Typography sx={dashboardStyles.title}>
+              Gloabl statistics
+            </Typography>
+          </Box>
+        </Grid>
         <Grid item xs={12} lg={12}>
           <GlobalSummary />
         </Grid>
         <Grid item xs={12} lg={12}>
           <CountriesList />
-          {/* <Grid container>
-            <Grid item xs={12}>
-              {show &&
-                <></>
-                // <Globe
-                //   display={{ xs: "none", md: "block" }}
-                //   position="absolute"
-                //   top="10%"
-                //   right={0}
-                //   mt={{ xs: -12, lg: 1 }}
-                //   mr={{ xs: 0, lg: 10 }}
-                //   canvasStyle={{ marginTop: "3rem" }}
-                // />
-              }
-            </Grid>
-          </Grid> */}
         </Grid>
       </Grid>
     </Box>

@@ -4,7 +4,9 @@ export const dataTableStyles = {
         overflow: 'hidden',
         borderRadius: "1rem",
         border: "0px solid rgba(0, 0, 0, 0.125)",
-        backgroundColor: "rgb(255, 255, 255)"
+        backgroundColor: "rgb(255, 255, 255)",
+        position: "relative",
+        marginTop: "25px"
     },
     title: {
         paddingLeft: 24,
