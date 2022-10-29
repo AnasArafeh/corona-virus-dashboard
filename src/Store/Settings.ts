@@ -1,0 +1,1 @@
+export const REACT_APP_API_ENDPOINT = `https://api.covid19api.com`;

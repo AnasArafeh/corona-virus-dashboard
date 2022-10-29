@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, useContext, useEffect } from 'react';
+import { SharedContext } from './StateManagement/Reducers/SharedReducer';
+import { getApiRoutes } from './Services/Shared';
+import { Loader } from './Components/Loader/Loader';
+import Header from './Components/Header/Header';
+import AppRoutes from './Routes/Routes';
 
 function App() {
+  const { SetRoutes, state: { apiRoutes } } = useContext(SharedContext);
+
+  useEffect(() => {
+    fetchRoutes();
+  }, [])
+
+  const fetchRoutes = async () => {
+    let result = await getApiRoutes();
+    if (result)
+      SetRoutes(result.data);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<Loader isActive={true} isAbsolute={true} isWithoutText={true} />}>
+      <Header />
+      <AppRoutes />
+    </Suspense>
   );
 }
 
