@@ -10,7 +10,7 @@
   color: white;
   transform: translate(-50%, -50%);
 }
-.spinner-wrapperis-absolute {
+.spinner-wrapper .is-absolute {
   position: absolute;
 }
 .spinner-wrapper .app-spinner {

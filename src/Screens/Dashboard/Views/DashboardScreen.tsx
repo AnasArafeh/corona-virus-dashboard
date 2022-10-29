@@ -8,6 +8,8 @@ import { getAvailableCountries, getCovidSummary } from "../../../Services/Dashbo
 import { AvailableRoutes } from "../../../Store/APIRoutes";
 import { DashboardContext } from "../../../StateManagement/Reducers/DashboardReducer";
 import GlobalSummary from "../Components/GlobalSummary";
+import CountriesList from "../Components/CountriesList";
+import { Loader } from "../../../Components/Loader/Loader";
 
 const DashboardScreen = () => {
   const { values } = breakpoints;
@@ -26,12 +28,12 @@ const DashboardScreen = () => {
   // }, [])
 
   const { state: { apiRoutes } } = useContext(SharedContext);
-  const { SetSummary, SetAvailableCountries } = useContext(DashboardContext);
+  const { SetSummary, SetIsLoading } = useContext(DashboardContext);
 
   useEffect(() => {
     if (apiRoutes && Object.keys(apiRoutes).length > 0) {
+      SetIsLoading(true);
       fetchSummary();
-      fetchCountries();
     }
   }, [apiRoutes])
 
@@ -39,17 +41,13 @@ const DashboardScreen = () => {
     let path = apiRoutes[AvailableRoutes.summaryRoute].Path;
     if (path) {
       let result = await getCovidSummary(path);
-      if (result)
+      //localStorage.setItem("CData", JSON.stringify(result.data));
+      //let result = localStorage.getItem("CData");
+      if (result) {
         SetSummary(result.data);
-    }
-  }
-
-  const fetchCountries = async () => {
-    let path = apiRoutes[AvailableRoutes.countriesRoute].Path;
-    if (path) {
-      let result = await getAvailableCountries(path);
-      if (result)
-        SetAvailableCountries(result.data);
+        //SetSummary(JSON.parse(result));
+        SetIsLoading(false);
+      }
     }
   }
 
@@ -60,6 +58,7 @@ const DashboardScreen = () => {
           <GlobalSummary />
         </Grid>
         <Grid item xs={12} lg={12}>
+          <CountriesList />
           {/* <Grid container>
             <Grid item xs={12}>
               {show &&

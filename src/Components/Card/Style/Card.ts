@@ -54,6 +54,11 @@ export const cardStyles = {
         width: "1em",
         height: "1em",
         color: "rgb(255, 255, 255)"
+    },
+    loader: {
+        display: "flex",
+        padding: "0px",
+        justifyContent: "center"
     }
 
 }

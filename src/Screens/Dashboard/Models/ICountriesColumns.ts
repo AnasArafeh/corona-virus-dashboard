@@ -1,7 +1,7 @@
 export interface Column {
-    id: 'name' | 'code' | 'population' | 'size' | 'density';
+    id: 'Country' | 'TotalConfirmed' | 'TotalDeaths' | 'TotalRecovered' | 'NewConfirmed' | 'NewDeaths' | 'NewRecovered';
     label: string;
     minWidth?: number;
-    align?: 'right';
+    align?: 'right' | "center" | "left";
     format?: (value: number) => string;
 }

@@ -1,34 +1,36 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, Typography } from '@mui/material';
 import Icon from "@mui/material/Icon";
 import { numberWithCommas } from '../../Helpers/NumberHelper';
+import { CardProps } from './Models/ICard';
 import { cardStyles } from './Style/Card';
-interface CardProps {
-    name: string,
-    value: number,
-    icon: string
-}
 
-const Card = ({ name, value, icon }: CardProps) => {
 
+const Card = ({ name, value, icon, isLoading = false }: CardProps) => {
 
     return (
         <Box component="div" style={cardStyles.container}>
             <Grid container justifyContent="space-between" >
                 <Grid item lg={6}>
-                    <Box component="div" sx={cardStyles.wordsContainer}>
-                        <Typography sx={cardStyles.header}>
-                            {name}
-                        </Typography>
-                        <Typography sx={cardStyles.subHeader}>
-                            {numberWithCommas(value)}
-                        </Typography>
-                    </Box>
+                    {isLoading ?
+                        <Box sx={cardStyles.loader}>
+                            <CircularProgress />
+                        </Box>
+                        :
+                        <Box component="div" sx={cardStyles.wordsContainer}>
+                            <Typography sx={cardStyles.header}>
+                                {name}
+                            </Typography>
+                            <Typography sx={cardStyles.subHeader}>
+                                {numberWithCommas(value)}
+                            </Typography>
+                        </Box>
+                    }
                 </Grid>
 
                 <Grid item lg={6}>
                     <Box sx={cardStyles.iconContainer}>
                         <Icon sx={cardStyles.icon} >
-                            add_box
+                            {icon}
                         </Icon>
                     </Box>
                 </Grid>

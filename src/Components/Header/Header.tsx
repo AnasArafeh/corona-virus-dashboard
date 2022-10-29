@@ -23,7 +23,7 @@ const Header = () => {
                         <MenuIcon sx={headerStyles.theme} />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, ...headerStyles.theme }} color='action'>
-                        Dashboard
+                        Dashboard - Corona virus statistics
                     </Typography>
                     <IconButton
                         size="large"
