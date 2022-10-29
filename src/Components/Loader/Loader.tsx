@@ -1,14 +1,7 @@
 
-import React from 'react';
 import image from '../../Assets/images/loading.gif';
+import { LoaderProps } from './Models/ILoader';
 import './Style/Loader.css';
-
-interface LoaderProps {
-    isActive: boolean,
-    isAbsolute?: boolean,
-    isWithoutText?: boolean,
-    isSmall?: boolean
-}
 
 export const Loader = ({ isActive, isAbsolute = false, isWithoutText = true, isSmall = false }: LoaderProps) => (
     <>

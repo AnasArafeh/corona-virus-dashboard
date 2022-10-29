@@ -1,4 +1,7 @@
 export const dashboardStyles = {
+    container: {
+        margin: "2.5% 5%"
+    },
     titleContainer: {
         marginBottom: "25px",
         paddding: "8px",

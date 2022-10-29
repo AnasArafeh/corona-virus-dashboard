@@ -1,9 +1,7 @@
-// @mui material components
 import Grid from "@mui/material/Grid";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { SharedContext } from "../../../StateManagement/Reducers/SharedReducer";
 import { Box, Typography } from "@mui/material";
-import breakpoints from "../../../Assets/breakpoints";
 import { getCovidSummary } from "../../../Services/Dashboard";
 import { AvailableRoutes } from "../../../Store/APIRoutes";
 import { DashboardContext } from "../../../StateManagement/Reducers/DashboardReducer";
@@ -34,7 +32,7 @@ const DashboardScreen = () => {
   }
 
   return (
-    <Box style={{ margin: "2.5% 5%" }}>
+    <Box style={dashboardStyles.container}>
       <Grid container>
         <Grid item xs={12} md={4} lg={4}>
           <Box component="div" sx={dashboardStyles.titleContainer}>
