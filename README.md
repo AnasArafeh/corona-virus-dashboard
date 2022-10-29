@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+The project was made using both Flux and Modular architecture.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Flux pattern where all of the views (parent and child) communicate with store using actions and actions get dispatched into the store using dispatcher instead of communcating directly with each other.
 
-## Available Scripts
+- Modular pattern where each module is not dependent on any other module and there is no communication between modules. Thus, we have loosely coupled application where we can add/remove modules without breaking the application.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+Folder architecture:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Assets folder contains any shared image, svg, etc... that might be needed in the application.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Components folder contains theme compoenets and shared components across the application (communicate with parent components using props)
 
-### `npm test`
+- Helpers folder contains helpers functions such as sorting functions, string manipulation, etc... .
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Hooks folder contains custome hooks.
 
-### `npm run build`
+- Models folder contains interfaces for all of the Get API requests that is done in the application which allows us to use for example categories API inside Product Module without referencing Category Module.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Routes folder contains the application routing and it's permission.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Screens folder contains the application screens/views each folder inside the Screen folder is considered as Module. And each Module has his own Components / Models / Store / Styles / Views and Index file.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - Index file is used to provider the context for the screens/views inside the module and it use conditional render to avoid conflicts between screens/views.
 
-### `npm run eject`
+- Services folder contains the baseAPI service where we have the API interceptors and a file for each Module which contains all of it's related API calls. It is shared for the same reason stated for the Models "for example categories API inside Product Module without referencing Category Module".
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- StateManagement folder contains actions / interfaces and reducers for each Module which is the base of the Flux architecture / pattern.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Store folder contains the static shared data across components for example the COVID apis uses Hatoes pattern. Which is a base API that returns all of the available APIs Rels which can be accessed directly. And in this cased I have saved all of the base Routes in the APIRoutes.ts file to avoid human error writing API Rels in case they were written in multiple places and it gives us the ability to easily change the Rel name from one place only.
